@@ -71,7 +71,7 @@
     </div>
   </div>
 <script>
-  const GAS_URL = "https://script.google.com/macros/s/AKfycbwANILDX555naUYI42C5WL_GUlz3LjtvmfYTy_m0jbjB4ny-iPqWAkcZblzHWsguhEmgQ/exec";
+ const GAS_URL = "https://script.google.com/macros/s/AKfycbzfP20qFhZRtr6N9bvUKXciD128A2ELgy06Ax6qqRpo1M7BdwwGfUs95wkowt5Z3licHQ/exec";
 
   async function submitForm() {
     const name = document.getElementById('name').value.trim();
