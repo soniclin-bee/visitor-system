@@ -70,36 +70,38 @@
       <span style="font-size:14px; color:#555; font-weight:normal;">謝謝您的登記。</span>
     </div>
   </div>
-  <script>
-    const GAS_URL = "https://script.google.com/macros/s/AKfycbwANILDX555naUYI42C5WL_GUlz3LjtvmfYTy_m0jbjB4ny-iPqWAkcZblzHWsguhEmgQ/exec";
+<script>
+  const GAS_URL = "https://script.google.com/macros/s/AKfycbwANILDX555naUYI42C5WL_GUlz3LjtvmfYTy_m0jbjB4ny-iPqWAkcZblzHWsguhEmgQ/exec";
 
-    async function submitForm() {
-      const name = document.getElementById('name').value.trim();
-      const company = document.getElementById('company').value.trim();
-      const purpose = document.getElementById('purpose').value.trim();
+  async function submitForm() {
+    const name = document.getElementById('name').value.trim();
+    const company = document.getElementById('company').value.trim();
+    const purpose = document.getElementById('purpose').value.trim();
 
-      if (!name || !company || !purpose) {
-        alert('請填寫所有欄位');
-        return;
-      }
-
-      const btn = document.getElementById('btn');
-      btn.disabled = true;
-      btn.textContent = '送出中...';
-
-      try {
-        await fetch(GAS_URL, {
-          method: 'POST',
-          body: JSON.stringify({ name, company, purpose })
-        });
-        document.getElementById('form').style.display = 'none';
-        document.getElementById('success').style.display = 'block';
-      } catch (err) {
-        alert('送出失敗，請重試');
-        btn.disabled = false;
-        btn.textContent = '送出登記';
-      }
+    if (!name || !company || !purpose) {
+      alert('請填寫所有欄位');
+      return;
     }
-  </script>
+
+    const btn = document.getElementById('btn');
+    btn.disabled = true;
+    btn.textContent = '送出中...';
+
+    const params = new URLSearchParams({ name, company, purpose });
+
+    try {
+      await fetch(GAS_URL + '?' + params.toString(), {
+        method: 'GET',
+        mode: 'no-cors'
+      });
+      document.getElementById('form').style.display = 'none';
+      document.getElementById('success').style.display = 'block';
+    } catch (err) {
+      alert('送出失敗，請重試');
+      btn.disabled = false;
+      btn.textContent = '送出登記';
+    }
+  }
+</script>
 </body>
 </html>
